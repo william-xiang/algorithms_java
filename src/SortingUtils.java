@@ -2,6 +2,7 @@
 public class SortingUtils {
 	/**
 	 * print all the elements in the array
+	 * 
 	 * @param nums
 	 */
 	public static void printNums(int[] nums) {
@@ -14,9 +15,10 @@ public class SortingUtils {
 		}
 		System.out.println();
 	}
-	
+
 	/**
 	 * swap the two elements in the array
+	 * 
 	 * @param nums
 	 * @param i
 	 * @param j
@@ -26,19 +28,19 @@ public class SortingUtils {
 		nums[i] = nums[j];
 		nums[j] = temp;
 	}
-	
+
 	/**
-	 * maintain the heap property for element with index and its children
-	 * make the parent be the largest one among these three elements
+	 * maintain the heap property for element with index and its children make the
+	 * parent be the largest one among these three elements worst time complexity is
+	 * O(logn)
 	 * 
 	 * @param nums
 	 */
-	public static void maxHeapify(int[] nums, int index) {
-		int size = nums.length;
+	public static void maxHeapify(int[] nums, int size, int index) {
 		// get the indices of left child and right child
 		int left = 2 * index + 1;
 		int right = 2 * index + 2;
-		
+
 		// get the index of the largest element
 		int max = index;
 		if (left < size && nums[max] < nums[left]) {
@@ -47,19 +49,25 @@ public class SortingUtils {
 		if (right < size && nums[max] < nums[right]) {
 			max = right;
 		}
-		
+
 		// update the parent element if it's not the largest one
 		if (max != index) {
 			swap(nums, max, index);
+			maxHeapify(nums, size, max);
 		}
 	}
-	
+
 	/**
 	 * construct a max heap using maxHeapify
+	 * time complexity is O(nlogn)
+	 * space complexity is O(1)
+	 * 
 	 * @param nums
 	 */
 	public static void makeHeap(int[] nums) {
 		int size = nums.length;
-		
+		for (int i = size / 2 - 1; i >= 0; i--) {
+			maxHeapify(nums, size, i);
+		}
 	}
 }
