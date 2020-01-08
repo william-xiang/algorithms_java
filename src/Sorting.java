@@ -1,3 +1,8 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.stream.Collectors;
+
 public class Sorting {
 	/**
 	 * insertion sort
@@ -39,7 +44,14 @@ public class Sorting {
 		}
 	}
 	
-	public static void heapSort(int[] nums) {
+	/**
+	 * heap sort using user defined methods
+	 * time complexity is O(nlogn)
+	 * space complexity is O(1)
+	 * not stable
+	 * @param nums
+	 */
+	public static void heapSort1(int[] nums) {
 		int size = nums.length;
 		
 		// first build the max heap using the given array
@@ -56,6 +68,16 @@ public class Sorting {
 			SortingUtils.maxHeapify(nums, size, 0);
 			SortingUtils.printNums(nums);
 
+		}
+	}
+	
+	public static void heapSort2(int[] nums) {
+		List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+		// construct a priority queue which is implemented by heap
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(list);
+		
+		for (int i = 0; i < nums.length; i++) {
+			nums[i] = maxHeap.remove();
 		}
 	}
 }
