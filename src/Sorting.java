@@ -37,8 +37,7 @@ public class Sorting {
 				int x = nums[j];
 				int y = nums[j + 1];
 				if (x > y) {
-					nums[j] = y;
-					nums[j + 1] = x;
+					SortingUtils.swap(nums, j, j + 1);
 				}
 			}
 		}
@@ -60,14 +59,9 @@ public class Sorting {
 		
 		// swap the first and last element
 		// then heapify to maintain the heap property
-		for (int i = size - 1; i >= 0; i--) {
+		for (int i = size - 1; i > 0; i--) {
 			SortingUtils.swap(nums, i, 0);
-			SortingUtils.printNums(nums);
-
-			size--;
-			SortingUtils.maxHeapify(nums, size, 0);
-			SortingUtils.printNums(nums);
-
+			SortingUtils.maxHeapify(nums, i, 0);
 		}
 	}
 	
