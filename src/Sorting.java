@@ -65,6 +65,13 @@ public class Sorting {
 		}
 	}
 	
+	/**
+	 * heap sort using the built-in priority queue of Java
+	 * time complexity is O(nlogn)
+	 * space complexity is O(1)
+	 * not stable
+	 * @param nums
+	 */
 	public static void heapSort2(int[] nums) {
 		List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
 		// construct a priority queue which is implemented by heap
@@ -72,6 +79,25 @@ public class Sorting {
 		
 		for (int i = 0; i < nums.length; i++) {
 			nums[i] = maxHeap.remove();
+		}
+	}
+	
+	/**
+	 * merge sort the array
+	 * @param nums
+	 */
+	public static void mergeSort(int[] nums, int l, int r) {
+		// base case of recursion is l = r
+		if (r - l + 1 <= nums.length && l < r) {
+			// to avoid overflow for large l and r
+			int m = l + (r - l) / 2;
+			
+			// merge sort the two halves
+			mergeSort(nums, l, m);
+			mergeSort(nums, m + 1, r);
+			
+			// merge the sorted two subarrays
+			SortingUtils.merge(nums, l, m, r);
 		}
 	}
 }

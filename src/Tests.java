@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertArrayEquals;
+
 import org.junit.Assert;
 
 import junit.framework.TestCase;
@@ -52,5 +54,28 @@ public class Tests extends TestCase {
 		// test sorting the non-empty array
 		Sorting.heapSort2(nums);
 		Assert.assertArrayEquals(expected, nums);
+	}
+	
+	public void testMerge() {
+		// test empty arrays
+		int[] nums = {};
+		SortingUtils.merge(nums, 1, 2, 3);
+		assertArrayEquals(new int[] {}, nums);
+		
+		// test normal arrays
+		nums = new int[] {4, 5, 6, 1, 2, 3};
+		SortingUtils.merge(nums, 0, 2, 5);
+		assertArrayEquals(expected, nums);
+	}
+	
+	public void testMergeSorting() {
+		// test empty arrays
+		int[] empty = {};
+		SortingUtils.merge(empty, 1, 2, 3);
+		assertArrayEquals(new int[] {}, empty);
+		
+		// test normal arrays
+		Sorting.mergeSort(nums, 0, 5);
+		assertArrayEquals(expected, nums);
 	}
 }

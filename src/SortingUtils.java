@@ -70,4 +70,52 @@ public class SortingUtils {
 			maxHeapify(nums, size, i);
 		}
 	}
+	
+	/**
+	 * merge two sorted arrays
+	 * @param nums
+	 * @param l 
+	 * @param m
+	 * @param r
+	 */
+	public static void merge(int[] nums, int l, int m, int r) {
+		int len1 = m - l + 1;
+		int len2 = r - m;
+		
+		if (len1 + len2 > nums.length) {
+			return;
+		}
+		
+		// create two temp arrays for the two subarrays
+		int[] left = new int[len1];
+		int[] right = new int[len2];
+		
+		// copy elements into the two subarrays
+		for (int i = 0; i < len1; i++) {
+			left[i] = nums[l + i];
+		}
+		for (int j = 0; j < len2; j++) {
+			right[j] = nums[m + j + 1];
+		}
+
+		// compare the elements from each array
+		// and decide which one to put in the result array
+		int i = 0;
+		int j = 0;
+		while (i < len1 && j < len2) {
+			if (left[i] <= right[j]) {
+				nums[l + i + j] = left[i++];
+			} else {
+				nums[l + i + j] = right[j++];
+			}
+		}
+
+		while (i < len1) {
+			nums[l + i + j] = left[i++];
+		}
+
+		while (j < len2) {
+			nums[l + i + j] = right[j++];
+		}
+	}
 }
