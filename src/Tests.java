@@ -71,9 +71,20 @@ public class Tests extends TestCase {
 	public void testMergeSorting() {
 		// test empty arrays
 		int[] empty = {};
-		SortingUtils.merge(empty, 1, 2, 3);
+		Sorting.mergeSort(empty, 1, 2);
 		assertArrayEquals(new int[] {}, empty);
 		
+		// test normal arrays
+		Sorting.mergeSort(nums, 0, 5);
+		assertArrayEquals(expected, nums);
+	}
+	
+	public void testPartition() {
+		int pivotIndex = SortingUtils.partition(nums, 0, 5);
+		assertEquals(4, pivotIndex);
+	}
+	
+	public void testQuickSort() {
 		// test normal arrays
 		Sorting.mergeSort(nums, 0, 5);
 		assertArrayEquals(expected, nums);

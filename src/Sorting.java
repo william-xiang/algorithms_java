@@ -55,7 +55,6 @@ public class Sorting {
 		
 		// first build the max heap using the given array
 		SortingUtils.makeHeap(nums);
-		SortingUtils.printNums(nums);
 		
 		// swap the first and last element
 		// then heapify to maintain the heap property
@@ -84,6 +83,9 @@ public class Sorting {
 	
 	/**
 	 * merge sort the array
+	 * time complexity is O(nlogn)
+	 * space complexity is O(n)
+	 * stable
 	 * @param nums
 	 */
 	public static void mergeSort(int[] nums, int l, int r) {
@@ -98,6 +100,14 @@ public class Sorting {
 			
 			// merge the sorted two subarrays
 			SortingUtils.merge(nums, l, m, r);
+		}
+	}
+	
+	public static void quickSort(int[] nums, int l, int r) {
+		if (l < r) {
+			int pivotIndex = SortingUtils.partition(nums, l, r);
+			quickSort(nums, l, pivotIndex);
+			quickSort(nums, pivotIndex + 1, r);
 		}
 	}
 }

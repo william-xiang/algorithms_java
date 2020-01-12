@@ -118,4 +118,27 @@ public class SortingUtils {
 			nums[l + i + j] = right[j++];
 		}
 	}
+	
+	/**
+	 * choose a pivot and rearrange the array according to the pivot in-place
+	 * the elements less than or equal to pivot are on the left of the pivot
+	 * the others will be on the right of the pivot
+	 * @param nums
+	 * @param l
+	 * @param r
+	 * @return
+	 */
+	public static int partition(int[] nums, int l, int r) {
+		int pivot = nums[r];
+		int i = l - 1;
+		for (int j = l; j < r; j++) {
+			if (nums[j] <= pivot) {
+				i++;
+				swap(nums, i, j);
+			}
+		}
+		swap(nums, i + 1, r);
+		
+		return i + 1;
+	}
 }
