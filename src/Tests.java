@@ -89,4 +89,25 @@ public class Tests extends TestCase {
 		Sorting.mergeSort(nums, 0, 5);
 		assertArrayEquals(expected, nums);
 	}
+	
+	public void testFibonacciRecursion() {
+		int[] expected = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+		for (int i = 0; i < expected.length; i++) {
+			assertEquals(expected[i], DP.fibonacciRecursion(i));
+		}
+	}
+	
+	public void testFibonacciRecursionMemoized() {
+		int[] expected = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+		for (int i = 0; i < expected.length; i++) {
+			assertEquals(expected[i], DP.fibonacciRecursionMemoized(i));
+		}
+	}
+	
+	public void testFibonacciIterative() {
+		int[] expected = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+		for (int i = 0; i < expected.length; i++) {
+			assertEquals(expected[i], DP.fibonacciIterative(i));
+		}
+	}
 }
