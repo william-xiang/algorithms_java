@@ -110,4 +110,54 @@ public class Tests extends TestCase {
 			assertEquals(expected[i], DP.fibonacciIterative(i));
 		}
 	}
+	
+	public void testNumberToWords() {
+		long num = 0;
+		assertEquals("Zero", Practices.numberToWords(num));
+		
+		num = 1;
+		assertEquals("One", Practices.numberToWords(num));
+		
+		num = 10;
+		assertEquals("Ten", Practices.numberToWords(num));
+		
+		num = 11;
+		assertEquals("Eleven", Practices.numberToWords(num));
+		
+		num = 17;
+		assertEquals("Seventeen", Practices.numberToWords(num));
+		
+		num = 20;
+		assertEquals("Twenty", Practices.numberToWords(num));
+		
+		num = 21;
+		assertEquals("Twenty One", Practices.numberToWords(num));
+		
+		num = 30;
+		assertEquals("Thirty", Practices.numberToWords(num));
+		
+		num = 31;
+		assertEquals("Thirty One", Practices.numberToWords(num));
+		
+		num = 100;
+		assertEquals("One Hundred", Practices.numberToWords(num));
+		
+		num = 101;
+		assertEquals("One Hundred One", Practices.numberToWords(num));
+		
+		num = 1000;
+		assertEquals("One Thousand", Practices.numberToWords(num));
+		
+		num = 1001;
+		assertEquals("One Thousand One", Practices.numberToWords(num));
+		
+		num = 101001;
+		assertEquals("One Hundred One Thousand One", Practices.numberToWords(num));
+		
+		num = 10000000010L;
+		assertEquals("Ten Billion Ten", Practices.numberToWords(num));
+		
+		num = 1001888888888L;
+		assertEquals("One Trillion One Billion Eight Hundred Eighty Eight Million Eight Hundred Eighty Eight Thousand Eight Hundred Eighty Eight", Practices.numberToWords(num));
+	}
 }
