@@ -1,3 +1,4 @@
+package algorithms_java;
 
 public class SortingUtils {
 	/**
@@ -59,7 +60,7 @@ public class SortingUtils {
 
 	/**
 	 * construct a max heap using maxHeapify
-	 * time complexity is O(nlogn)
+	 * time complexity is O(n)
 	 * space complexity is O(1)
 	 * 
 	 * @param nums

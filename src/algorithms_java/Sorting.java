@@ -1,3 +1,4 @@
+package algorithms_java;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -74,10 +75,10 @@ public class Sorting {
 	public static void heapSort2(int[] nums) {
 		List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
 		// construct a priority queue which is implemented by heap
-		PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(list);
+		PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(list);
 		
 		for (int i = 0; i < nums.length; i++) {
-			nums[i] = maxHeap.remove();
+			nums[i] = minHeap.remove();
 		}
 	}
 	

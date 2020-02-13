@@ -1,4 +1,8 @@
+package algorithms_java;
 import static org.junit.Assert.assertArrayEquals;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Assert;
 
@@ -180,5 +184,50 @@ public class Tests extends TestCase {
 		
 		num = 1001888888888L;
 		assertEquals("One Trillion One Billion Eight Hundred Eighty Eight Million Eight Hundred Eighty Eight Thousand Eight Hundred Eighty Eight", Practices.numberToWords(num));
+	}
+	
+	public void testKthSmallest1() {
+		assertEquals(3, Practices.kthSmallest1(nums, 3));
+		assertEquals(6, Practices.kthSmallest1(nums, 6));
+	}
+	
+	public void testMoveZeros1() {
+		List<Integer> nums = Arrays.asList(0);
+		Assert.assertEquals(Arrays.asList(0), Practices.moveZeros1(nums));
+		
+		nums = Arrays.asList(1, 0);
+		Assert.assertEquals(Arrays.asList(0, 1), Practices.moveZeros1(nums));
+		
+		nums = Arrays.asList(1, 2, 3, 0, 0);
+		Assert.assertEquals(Arrays.asList(1, 0, 0, 2, 3), Practices.moveZeros1(nums));
+		
+		nums = Arrays.asList(1, 2, 0, 3, 0, 4, 0, 5);
+		Assert.assertEquals(Arrays.asList(1, 2, 0, 0, 0, 3, 4, 5), Practices.moveZeros1(nums));
+	}
+	
+	public void testMoveZeros2() {
+		List<Integer> nums = Arrays.asList(0);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(0), nums);
+		
+		nums = Arrays.asList(1, 0);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(0, 1), nums);
+		
+		nums = Arrays.asList(1, 2, 3, 0, 0);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(1, 0, 0, 2, 3), nums);
+		
+		nums = Arrays.asList(1, 2, 0, 3, 0, 4, 0, 5);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(1, 2, 0, 0, 0, 3, 4, 5), nums);
+		
+		nums = Arrays.asList(0, 0, 0, 0);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(0, 0, 0, 0), nums);
+		
+		nums = Arrays.asList(0, 1, 0, 2, 0, 3);
+		Practices.moveZeros2(nums);
+		Assert.assertEquals(Arrays.asList(1, 0, 0, 0, 2, 3), nums);
 	}
 }
