@@ -348,4 +348,78 @@ public class Practices {
 		
 		return result;
 	}
+	/**
+	 * In a town, there are N people labeled from 1 to N.  
+	 * There is a rumor that one of these people is secretly the town judge.
+	 * 
+	 * If the town judge exists, then:
+	 * 1) The town judge trusts nobody.
+	 * 2) Everybody (except for the town judge) trusts the town judge.
+	 * There is exactly one person that satisfies properties 1 and 2.
+	 * 
+	 * You are given trust, an array of pairs trust[i] = [a, b] representing that the person labeled a trusts the person labeled b.
+	 * If the town judge exists and can be identified, return the label of the town judge.  Otherwise, return -1.
+	 * 
+	 * We can think of each person as the vertex of a graph, and the pair of trust as the edge of the graph
+	 * Get the in-degree and out-degree of all the vertices, check if there is any in-degree is equal to N - 1
+	 * the corresponding out-degree should be 0
+	 * 
+	 * @param N
+	 * @param trust
+	 * @return
+	 */
+	public static int findTownJudge(int N, int[][] trust) {
+		Map<Integer, Integer> inDegrees = new HashMap<>();
+		Map<Integer, Integer> outDegrees = new HashMap<>();
+		int nums = trust.length;
+		int maxInDegree = 0;
+		int vetexWithMaxInDegree = 1;
+		
+		for (int i = 0; i < nums; i++) {
+			int a = trust[i][0];
+			int b = trust[i][1];
+			int inDegree = 0;
+			int outDegree = 0;
+			
+			outDegree = outDegrees.containsKey(a) ? outDegrees.get(a) + 1 : 1;
+			inDegree = inDegrees.containsKey(b) ? inDegrees.get(b) + 1 : 1;
+			outDegrees.put(a, outDegree);
+			inDegrees.put(b, inDegree);
+			maxInDegree = Math.max(maxInDegree, inDegree);
+			vetexWithMaxInDegree = inDegree == maxInDegree ? b : vetexWithMaxInDegree;
+		}
+		
+		if (maxInDegree == N - 1 && !outDegrees.containsKey(vetexWithMaxInDegree)) {
+			return vetexWithMaxInDegree;
+		} else {
+			return -1;
+		}
+	}
+	/**
+	 * Problem with previous implementation is that:
+	 * even though search, insert and get for hashmap is O(1) in best cases, the worst is still O(n)
+	 * We can use array indexing to replace it, the time complexity of which is always O(1)
+	 *  
+	 * @param N
+	 * @param trust
+	 * @return
+	 */
+	public static int findTownJudge2(int N, int[][] trust) {
+		int[] degree = new int[N + 1];
+		
+		for (int[] i : trust) {
+			// i[0] represents vertex with out edge
+			degree[i[0]]--;
+			// i[1] represents vertex with in edge
+			degree[i[1]]++;
+		}
+		
+		for (int i = 1; i <= N; i++) {
+			if (degree[i] == N - 1) {
+				return i;
+			}
+		}
+		
+		return -1;
+	}
 }

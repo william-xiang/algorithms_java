@@ -230,4 +230,36 @@ public class Tests extends TestCase {
 		Practices.moveZeros2(nums);
 		Assert.assertEquals(Arrays.asList(1, 0, 0, 0, 2, 3), nums);
 	}
+	
+	public void testFindTownJudge() {
+		int N = 2;
+		int[][] trust = { { 1, 2 } };
+		assertEquals(2, Practices.findTownJudge(N, trust));
+		assertEquals(2, Practices.findTownJudge2(N, trust));
+		
+		N = 1;
+		trust = new int[][]{};
+		assertEquals(1, Practices.findTownJudge(N, trust));
+		assertEquals(1, Practices.findTownJudge2(N, trust));
+		
+		N = 3;
+		trust = new int[][]{ { 1, 3 }, {2, 3} };
+		assertEquals(3, Practices.findTownJudge(N, trust));
+		assertEquals(3, Practices.findTownJudge2(N, trust));
+		
+		N = 3;
+		trust = new int[][]{ { 1, 2 }, {2, 3} };
+		assertEquals(-1, Practices.findTownJudge(N, trust));
+		assertEquals(-1, Practices.findTownJudge2(N, trust));
+		
+		N = 3;
+		trust = new int[][]{ { 1, 3 }, {2, 3}, {3, 1} };
+		assertEquals(-1, Practices.findTownJudge(N, trust));
+		assertEquals(-1, Practices.findTownJudge2(N, trust));
+		
+		N = 4;
+		trust = new int[][]{ { 1, 3 }, {2, 4}, {2, 3}, {2, 4}, {4, 3} };
+		assertEquals(3, Practices.findTownJudge(N, trust));
+		assertEquals(3, Practices.findTownJudge2(N, trust));
+	}
 }
