@@ -422,4 +422,47 @@ public class Practices {
 		
 		return -1;
 	}
+	
+	/**
+	 * You have N gardens, labeled 1 to N.  In each garden, you want to plant one of 4 types of flowers.
+	 * paths[i] = [x, y] describes the existence of a bidirectional path from garden x to garden y.
+	 * Also, there is no garden that has more than 3 paths coming into or leaving it.
+	 * Your task is to choose a flower type for each garden such that, for any two gardens connected by a path, they have different types of flowers.
+	 * Return any such a choice as an array answer, where answer[i] is the type of flower planted in the (i+1)-th garden.  
+	 * The flower types are denoted 1, 2, 3, or 4.  It is guaranteed an answer exists.
+	 * 
+	 * first get the adjacency matrix for the graph
+	 * then try to assign type of flowers to each vertex by check if the vertex in the adjacency matrix already been assigned that type
+	 * 
+	 * time complexity: O(N^2)
+	 * space complexity: O(N^2)
+	 * 
+	 * @param N
+	 * @param paths
+	 * @return
+	 */
+	public static int[] gardenNoAdj1(int N, int[][] paths) {
+		int[] answer = new int[N];
+		
+		// get the adjacency matrix
+		boolean[][] adjMatrix = new boolean[N][N];
+		for (int[] i : paths) {
+			int a = i[0];
+			int b = i[1];
+			adjMatrix[a - 1][b - 1] = true;
+			adjMatrix[b - 1][a - 1] = true;
+		}
+		
+		for (int i = 0; i < N; i++) {
+			List<Integer> types = new ArrayList<>(Arrays.asList(new Integer[] {1, 2, 3, 4}));
+			for (int j = 0; j < N - 1; j++) {
+				if (adjMatrix[i][j] && answer[j] != 0) {
+					types.remove(new Integer(answer[j]));
+				}
+			}
+			answer[i] = types.get(0);
+		}
+		
+		return answer;
+	}
 }

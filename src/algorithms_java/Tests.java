@@ -262,4 +262,22 @@ public class Tests extends TestCase {
 		assertEquals(3, Practices.findTownJudge(N, trust));
 		assertEquals(3, Practices.findTownJudge2(N, trust));
 	}
+	
+	public void testGardenNoAdj() {
+		int N = 1;
+		int[][] path = {};
+		assertArrayEquals(new int[] {1}, Practices.gardenNoAdj1(N, path));
+		
+		N = 3;
+		path = new int[][]{ { 1, 2 }, {2, 3}, {3, 1} };
+		assertArrayEquals(new int[] {1, 2, 3}, Practices.gardenNoAdj1(N, path));
+		
+		N = 4;
+		path = new int[][]{ { 1, 2 }, {3, 4} };
+		assertArrayEquals(new int[] {1, 2, 1, 2}, Practices.gardenNoAdj1(N, path));
+
+		N = 4;
+		path = new int[][]{ { 1, 2 }, {2, 3}, {3, 4}, {4, 1}, {1, 3}, {2, 4} };
+		assertArrayEquals(new int[] {1, 2, 3, 4}, Practices.gardenNoAdj1(N, path));
+	}
 }
