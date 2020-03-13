@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -464,5 +468,84 @@ public class Practices {
 		}
 		
 		return answer;
+	}
+	
+	/**
+	 * Given a 2d grid map of '1's (land) and '0's (water), count the number of
+	 * islands. An island is surrounded by water and is formed by connecting
+	 * adjacent lands horizontally or vertically. You may assume all four edges of
+	 * the grid are all surrounded by water.
+	 * 
+	 * using BFS to solve this problem. Loop through each element in the grid and if it's 1, 
+	 * then try to use bfs to check the boundary of the island. At the same time, mark all
+	 * the visited elements.
+	 * 
+	 * 
+	 * 
+	 * @param grid
+	 * @return
+	 */
+	public static int numIslands(char[][] grid) {
+        int height = grid.length;
+        // handle boundary cases
+        if (height == 0) {
+            return 0;
+        }
+        
+        int width = grid[0].length;
+        if (width == 0) {
+            return 0;
+        }
+        
+        // count the number of islands
+        int num = 0;
+        Set<LinkedList<Integer>> visited = new HashSet<>();
+        for (int i = 0; i < height; i++) {
+        	for (int j = 0; j < width; j++) {
+        		// if current element is 1 and not visited
+        		// then using bfs from this element
+        		LinkedList<Integer> element = new LinkedList<>(Arrays.asList(i, j));
+				if (!visited.contains(element)) {
+					visited.add(element);
+        			if (grid[i][j] == '1') {
+        				bfs(i, j, grid, visited);
+        				num++;
+        			}
+        		}
+        	}
+        }
+		
+		return num;
+	}
+
+	private static void bfs(int i, int j, char[][] grid, Set<LinkedList<Integer>> visited) {
+		final int[][] DIRECTIONS = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
+		Queue<List<Integer>> queue = new LinkedList<>();
+		LinkedList<Integer> element = new LinkedList<>(Arrays.asList(i, j));
+		queue.add(element);
+		
+		while (!queue.isEmpty()) {
+			List<Integer> top = queue.remove();
+			i = top.get(0);
+			j = top.get(1);
+			// check the four directions of this element
+			for (int[] direction : DIRECTIONS) {
+				int x = i + direction[0];
+				int y = j + direction[1];
+				element = new LinkedList<>(Arrays.asList(x, y));
+				if (isValid(element, grid.length, grid[0].length) && !visited.contains(element)) {
+					visited.add(element);
+					if (grid[x][y] == '1') {
+						queue.add(element);
+					}
+				}
+			}
+		}
+	}
+
+	private static boolean isValid(LinkedList<Integer> element, int height, int width) {
+		int x = element.get(0);
+		int y = element.get(1);
+		return x >= 0 && x <= height - 1 && y >= 0 && y <= width - 1;
 	}
 }

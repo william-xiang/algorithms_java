@@ -280,4 +280,12 @@ public class Tests extends TestCase {
 		path = new int[][]{ { 1, 2 }, {2, 3}, {3, 4}, {4, 1}, {1, 3}, {2, 4} };
 		assertArrayEquals(new int[] {1, 2, 3, 4}, Practices.gardenNoAdj1(N, path));
 	}
+	
+	public void testNumIslands() {
+		char[][] grid = { { '1', '1', '1', '1', '0' }, { '1', '1', '0', '1', '0' }, { '1', '1', '0', '0', '0' }, { '0', '0', '0', '0', '0' } };
+		assertEquals(1, Practices.numIslands(grid));
+		
+		grid = new char[][]{ { '1', '1', '0', '0', '0' }, { '1', '1', '0', '0', '0' }, { '0', '0', '1', '0', '0' }, { '0', '0', '0', '1', '1' } };
+		assertEquals(3, Practices.numIslands(grid));
+	}
 }
