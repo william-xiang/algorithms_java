@@ -499,18 +499,16 @@ public class Practices {
         
         // count the number of islands
         int num = 0;
-        Set<LinkedList<Integer>> visited = new HashSet<>();
         for (int i = 0; i < height; i++) {
         	for (int j = 0; j < width; j++) {
         		// if current element is 1 and not visited
         		// then using bfs from this element
-        		LinkedList<Integer> element = new LinkedList<>(Arrays.asList(i, j));
-				if (!visited.contains(element)) {
-					visited.add(element);
+				if (grid[i][j] != 'v') {
         			if (grid[i][j] == '1') {
-        				bfs(i, j, grid, visited);
+        				bfs(i, j, grid);
         				num++;
         			}
+        			grid[i][j] = 'v';
         		}
         	}
         }
@@ -518,7 +516,7 @@ public class Practices {
 		return num;
 	}
 
-	private static void bfs(int i, int j, char[][] grid, Set<LinkedList<Integer>> visited) {
+	private static void bfs(int i, int j, char[][] grid) {
 		final int[][] DIRECTIONS = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
 		Queue<List<Integer>> queue = new LinkedList<>();
 		LinkedList<Integer> element = new LinkedList<>(Arrays.asList(i, j));
@@ -532,20 +530,18 @@ public class Practices {
 			for (int[] direction : DIRECTIONS) {
 				int x = i + direction[0];
 				int y = j + direction[1];
-				element = new LinkedList<>(Arrays.asList(x, y));
-				if (isValid(element, grid.length, grid[0].length) && !visited.contains(element)) {
-					visited.add(element);
+				if (isValid(x, y, grid.length, grid[0].length) && grid[x][y] != 'v') {
+					element = new LinkedList<>(Arrays.asList(x, y));
 					if (grid[x][y] == '1') {
 						queue.add(element);
 					}
+					grid[x][y] = 'v';
 				}
 			}
 		}
 	}
 
-	private static boolean isValid(LinkedList<Integer> element, int height, int width) {
-		int x = element.get(0);
-		int y = element.get(1);
+	private static boolean isValid(int x, int y, int height, int width) {
 		return x >= 0 && x <= height - 1 && y >= 0 && y <= width - 1;
 	}
 }
